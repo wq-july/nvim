@@ -2,19 +2,17 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "NvimTreeToggle", -- 懒加载触发
-    keys = {
-      { "<leader>e", ":NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
-      { "<leader>f", ":NvimTreeFocus<CR>",  desc = "Focus NvimTree" },
-    },
+    -- 移除自定义快捷键，使用 LazyVim 默认快捷键
+    -- LazyVim 默认使用 <leader>e 来切换文件树
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
     opts = {
       ------------------------------------------------------------------
       -- 基础外观
       ------------------------------------------------------------------
       hijack_netrw = true,      -- 接管 netrw
       open_on_tab = false,      -- 打开新 tab 时不自动打开
-      sync_root_with_cwd = true, -- 文件树跟随 cwd
-      respect_buf_cwd = true,   -- 新建窗口使用当前 buffer 的 cwd
+      sync_root_with_cwd = false, -- 关闭自动同步根目录（性能优化）
+      respect_buf_cwd = false,   -- 关闭自动跟随 buffer cwd（性能优化）
 
       ------------------------------------------------------------------
       -- 视图设置
@@ -25,7 +23,7 @@ return {
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        preserve_window_proportions = true,
+        preserve_window_proportions = false, -- 关闭窗口比例保持（性能优化）
         -- 浮动窗口模式
         float = {
           enable = false, -- 默认侧边栏模式，如果想用浮动可以改 true
@@ -41,14 +39,14 @@ return {
       },
 
       ------------------------------------------------------------------
-      -- 行为设置
+      -- 行为设置（性能优化）
       ------------------------------------------------------------------
       update_focused_file = {
         enable = true,          -- 光标移动时自动定位到文件
-        update_root = true,     -- 更新树根到当前文件夹
+        update_root = false,    -- 关闭自动更新根目录（性能优化，避免卡顿）
       },
-      hijack_cursor = true,      -- 打开文件时光标移动到文件
-      reload_on_bufenter = true, -- 自动刷新
+      hijack_cursor = false,     -- 关闭光标劫持（性能优化）
+      reload_on_bufenter = false, -- 关闭自动刷新（性能优化，避免卡顿）
 
       ------------------------------------------------------------------
       -- 文件过滤
@@ -60,18 +58,18 @@ return {
       },
 
       ------------------------------------------------------------------
-      -- 图标
+      -- 图标（性能优化）
       ------------------------------------------------------------------
       renderer = {
-        highlight_git = true,
-        highlight_opened_files = "all",
-        root_folder_modifier = ":t", -- 仅显示文件夹名
+        highlight_git = false,           -- 关闭 git 高亮（性能优化）
+        highlight_opened_files = "none", -- 关闭打开文件高亮（性能优化）
+        root_folder_modifier = ":t",     -- 仅显示文件夹名
         icons = {
           show = {
             file = true,
             folder = true,
             folder_arrow = true,
-            git = true,
+            git = false,                  -- 关闭 git 图标（性能优化）
           },
           glyphs = {
             folder = {
@@ -95,24 +93,10 @@ return {
       },
 
       ------------------------------------------------------------------
-      -- 快捷键与搜索栏
+      -- 快捷键与搜索栏（使用 LazyVim 默认快捷键）
       ------------------------------------------------------------------
-      on_attach = function(bufnr)
-        local api = require("nvim-tree.api")
-        local function opts(desc)
-          return { desc = desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- 搜索栏（类似旧版本顶部栏）
-        vim.keymap.set("n", "/", api.tree.search_node, opts("Search Node"))
-
-        -- 打开文件/关闭树
-        vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-        vim.keymap.set("n", "o", api.node.open.edit, opts("Open"))
-
-        -- 刷新
-        vim.keymap.set("n", "R", api.tree.reload, opts("Reload"))
-      end,
+      -- 移除自定义 on_attach，使用 LazyVim 默认的快捷键映射
+      -- 如果需要自定义，可以通过 LazyVim 的配置方式添加
 
       ------------------------------------------------------------------
       -- 系统配置

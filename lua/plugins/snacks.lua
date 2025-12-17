@@ -94,45 +94,53 @@ return {
     },
 
     keys = {
-      ------------------------------------------------------------------
-      -- Buffer/Terminal/Image/Zen/Notifications
-      ------------------------------------------------------------------
-      { "<A-w>", function() require("snacks").bufdelete() end, desc = "[Snacks] 删除 buffer" },
-      { "<leader>si", function() require("snacks").image.hover() end, desc = "[Snacks] 显示图片" },
-      { "<A-i>", function() require("snacks").terminal() end, desc = "[Snacks] 切换终端", mode = {"n",  "t"} },
-      { "<leader>sn", function() require("snacks").picker.notifications() end, desc = "[Snacks] 通知历史" },
-      { "<leader>n",  function() require("snacks").notifier.show_history() end, desc = "[Snacks] 通知历史" },
-      { "<leader>un", function() require("snacks").notifier.hide() end, desc = "[Snacks] 清除通知" },
-      { "<leader>z",  function() require("snacks").zen() end, desc = "[Snacks] 切换禅模式" },
-      { "<leader>Z",  function() require("snacks").zen.zoom() end, desc = "[Snacks] Zen 放大模式" },
+      -- ------------------------------------------------------------------
+      -- -- Buffer/Terminal/Image/Zen/Notifications
+      -- ------------------------------------------------------------------
+      -- { "<A-w>", function() require("snacks").bufdelete() end, desc = "[Snacks] 删除 buffer" },
+      -- { "<leader>si", function() require("snacks").image.hover() end, desc = "[Snacks] 显示图片" },
+      -- { "<A-i>", function() require("snacks").terminal() end, desc = "[Snacks] 切换终端", mode = {"n",  "t"} },
+      -- { "<leader>sn", function() require("snacks").picker.notifications() end, desc = "[Snacks] 通知历史" },
+      -- { "<leader>n",  function() require("snacks").notifier.show_history() end, desc = "[Snacks] 通知历史" },
+      -- { "<leader>un", function() require("snacks").notifier.hide() end, desc = "[Snacks] 清除通知" },
+      -- { "<leader>z",  function() require("snacks").zen() end, desc = "[Snacks] 切换禅模式" },
+      -- { "<leader>Z",  function() require("snacks").zen.zoom() end, desc = "[Snacks] Zen 放大模式" },
+
+      -- ------------------------------------------------------------------
+      -- -- 文件、缓冲区、搜索
+      -- ------------------------------------------------------------------
+      -- { "<leader><space>", function() require("snacks").picker.smart() end, desc = "[Snacks] 智能搜索文件" },
+      -- { "<leader>,",      function() require("snacks").picker.buffers() end, desc = "[Snacks] Buffers" },
+      -- { "<leader>sf",     function() require("snacks").picker.files() end, desc = "[Snacks] 查找文件" },
+      -- { "<leader>sp",     function() require("snacks").picker.projects() end, desc = "[Snacks] Projects" },
+      -- { "<leader>sr",     function() require("snacks").picker.recent() end, desc = "[Snacks] 最近文件" },
+      -- { "<leader>sg",     function() require("snacks").picker.grep() end, desc = "[Snacks] 全局搜索" },
+
+      -- ------------------------------------------------------------------
+      -- -- Git 功能
+      -- ------------------------------------------------------------------
+      -- { "<C-g>", function() require("snacks").lazygit() end, desc = "[Snacks] Lazygit" },
+      -- { "<leader>ggl", function() require("snacks").picker.git_log() end, desc = "[Snacks] Git 日志" },
+      -- { "<leader>ggd", function() require("snacks").picker.git_diff() end, desc = "[Snacks] Git diff" },
+      -- { "<leader>ggb", function() require("snacks").git.blame_line() end, desc = "[Snacks] Git blame 当前行" },
+      -- { "<leader>ggB", function() require("snacks").gitbrowse() end, desc = "[Snacks] Git 仓库浏览" },
 
       ------------------------------------------------------------------
-      -- 文件、缓冲区、搜索
+      -- LSP 功能（使用 LazyVim 默认的 LSP 功能，而不是 snacks 的）
+      -- 如果 snacks 的 LSP 功能不工作，LazyVim 会自动提供备用方案
       ------------------------------------------------------------------
-      { "<leader><space>", function() require("snacks").picker.smart() end, desc = "[Snacks] 智能搜索文件" },
-      { "<leader>,",      function() require("snacks").picker.buffers() end, desc = "[Snacks] Buffers" },
-      { "<leader>sf",     function() require("snacks").picker.files() end, desc = "[Snacks] 查找文件" },
-      { "<leader>sp",     function() require("snacks").picker.projects() end, desc = "[Snacks] Projects" },
-      { "<leader>sr",     function() require("snacks").picker.recent() end, desc = "[Snacks] 最近文件" },
-      { "<leader>sg",     function() require("snacks").picker.grep() end, desc = "[Snacks] 全局搜索" },
-
-      ------------------------------------------------------------------
-      -- Git 功能
-      ------------------------------------------------------------------
-      { "<C-g>", function() require("snacks").lazygit() end, desc = "[Snacks] Lazygit" },
-      { "<leader>ggl", function() require("snacks").picker.git_log() end, desc = "[Snacks] Git 日志" },
-      { "<leader>ggd", function() require("snacks").picker.git_diff() end, desc = "[Snacks] Git diff" },
-      { "<leader>ggb", function() require("snacks").git.blame_line() end, desc = "[Snacks] Git blame 当前行" },
-      { "<leader>ggB", function() require("snacks").gitbrowse() end, desc = "[Snacks] Git 仓库浏览" },
-
-      ------------------------------------------------------------------
-      -- LSP 功能
-      ------------------------------------------------------------------
-      { "gd", function() require("snacks").picker.lsp_definitions() end, desc = "[Snacks] 跳转到定义" },
-      { "gD", function() require("snacks").picker.lsp_declarations() end, desc = "[Snacks] 跳转到声明" },
-      { "gr", function() require("snacks").picker.lsp_references() end, desc = "[Snacks] LSP References" },
-      { "gI", function() require("snacks").picker.lsp_implementations() end, desc = "[Snacks] 跳转到实现" },
-      { "<leader>ss", function() require("snacks").picker.lsp_symbols() end, desc = "[Snacks] LSP Symbols" },
+      -- 注释掉 snacks 的 LSP 快捷键，使用 LazyVim 默认的
+      -- LazyVim 默认快捷键：
+      -- gd - 跳转到定义（使用 vim.lsp.buf.definition）
+      -- gD - 跳转到声明（使用 vim.lsp.buf.declaration）
+      -- gr - 查找引用（使用 vim.lsp.buf.references）
+      -- gI - 跳转到实现（使用 vim.lsp.buf.implementation）
+      -- <leader>ss - LSP 符号（使用 trouble.nvim）
+      -- { "gd", function() require("snacks").picker.lsp_definitions() end, desc = "[Snacks] 跳转到定义" },
+      -- { "gD", function() require("snacks").picker.lsp_declarations() end, desc = "[Snacks] 跳转到声明" },
+      -- { "gr", function() require("snacks").picker.lsp_references() end, desc = "[Snacks] LSP References" },
+      -- { "gI", function() require("snacks").picker.lsp_implementations() end, desc = "[Snacks] 跳转到实现" },
+      -- { "<leader>ss", function() require("snacks").picker.lsp_symbols() end, desc = "[Snacks] LSP Symbols" },
     },
 
     init = function()

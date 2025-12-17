@@ -7,6 +7,7 @@ return {
     opts = {
       ensure_installed = {
         "clangd",
+        "clang-format", -- 确保 clang-format 已安装
         "lua-language-server",
       },
     },

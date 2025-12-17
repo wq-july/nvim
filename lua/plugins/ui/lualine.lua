@@ -8,7 +8,7 @@ return {
   },
   opts = {
     options = {
-      theme = "catppuccin",
+      theme = "vscode", -- 使用 vscode 主题
       always_divide_middle = false,
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
@@ -17,7 +17,7 @@ return {
       lualine_a = { "mode" },
       lualine_b = { "branch", "diff", "diagnostics" },
       lualine_c = { "filename" },
-      lualine_x = {},
+      -- lualine_x = {},
       lualine_y = { "encoding", "fileformat", "filetype", "progress" },
       lualine_z = { "location" },
     },
@@ -31,7 +31,19 @@ return {
     },
   },
   config = function(_, opts)
-    local mocha = require("catppuccin.palettes").get_palette("mocha")
+    -- 使用 VSCode 主题的颜色
+    -- VSCode 主题的颜色定义
+    local vscode_colors = {
+      red = "#f48771",
+      green = "#89d185",
+      yellow = "#dcdcaa",
+      blue = "#569cd6",
+      purple = "#c586c0",
+      cyan = "#4ec9b0",
+      orange = "#ce9178",
+      gray = "#808080",
+      dark_gray = "#3c3c3c",
+    }
 
     -- 宏录制状态显示
     local function show_macro_recording()
@@ -41,7 +53,7 @@ return {
 
     local macro_recording = {
       show_macro_recording,
-      color = { fg = "#333333", bg = mocha.red },
+      color = { fg = "#ffffff", bg = vscode_colors.red },
       separator = { left = "", right = "" },
       padding = 0,
     }
@@ -53,14 +65,14 @@ return {
       symbols = {
         status = {
           hl = {
-            enabled = mocha.green,
-            sleep = mocha.overlay0,
-            disabled = mocha.surface0,
-            warning = mocha.peach,
-            unknown = mocha.red,
+            enabled = vscode_colors.green,
+            sleep = vscode_colors.gray,
+            disabled = vscode_colors.dark_gray,
+            warning = vscode_colors.orange,
+            unknown = vscode_colors.red,
           },
         },
-        spinner_color = mocha.mauve,
+        spinner_color = vscode_colors.blue,
       },
     }
 
