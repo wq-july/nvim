@@ -21,8 +21,10 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
-      -- 启动 Neovim 时是否自动恢复上次会话
-      auto_restore = false,
+      -- 启动 Neovim 时自动恢复上次会话（包含工作目录）
+      auto_restore = true,
+      -- 启用自动保存会话
+      auto_save = true,
       -- 不在这些目录下创建会话
       suppressed_dirs = { "~/", "~/Downloads", "/" },
     },

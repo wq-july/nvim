@@ -1,0 +1,22 @@
+# clangd 配置文件示例
+# 将此文件复制到你的 C++ 项目根目录
+
+# 指定编译数据库位置（如果 compile_commands.json 在 build_x86 文件夹）
+CompileFlags:
+  CompilationDatabase: build_x86/
+
+# 编译参数配置
+CompileFlags:
+  Add:
+    - -std=c++17
+    - -Wall
+    - -Wextra
+    - --function-arg-placeholders=0  # 关闭函数参数占位符提示
+
+# 如果没有 compile_commands.json，可以手动指定编译参数
+# CompileFlags:
+#   Add:
+#     - -std=c++17
+#     - -I./include
+#     - -I./src
+#     - -DDEBUG

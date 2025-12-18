@@ -16,14 +16,21 @@ return {
     opts = {
 
       ------------------------------------------------------------------
-      -- 1. 键位：完全交给 LazyVim（这是关键）
+      -- 1. 键位：自定义 Tab 键补全
       ------------------------------------------------------------------
       keymap = {
-        preset = "default",
+        preset = "none",  -- 关闭默认预设，自定义按键
 
-        -- 如需自定义，再逐个打开
-        -- ["<A-j>"] = { function(cmp) return cmp.select_next({ auto_insert = false }) end, "fallback" },
-        -- ["<A-k>"] = { function(cmp) return cmp.select_prev({ auto_insert = false }) end, "fallback" },
+        -- j/k 键进行补全选择
+        ["j"] = { "select_next", "fallback" },
+        ["k"] = { "select_prev", "fallback" },
+
+        -- Tab 键确认补全
+        ["<Tab>"] = { "accept", "fallback" },
+
+        -- 其他快捷键
+        ["<C-e>"] = { "hide", "fallback" },      -- 隐藏补全菜单
+        ["<C-Space>"] = { "show", "fallback" },  -- 手动触发补全
       },
 
       ------------------------------------------------------------------

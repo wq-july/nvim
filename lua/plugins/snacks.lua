@@ -126,21 +126,15 @@ return {
       -- { "<leader>ggB", function() require("snacks").gitbrowse() end, desc = "[Snacks] Git 仓库浏览" },
 
       ------------------------------------------------------------------
-      -- LSP 功能（使用 LazyVim 默认的 LSP 功能，而不是 snacks 的）
-      -- 如果 snacks 的 LSP 功能不工作，LazyVim 会自动提供备用方案
+      -- LSP 快捷键配置（使用 Snacks picker）
       ------------------------------------------------------------------
-      -- 注释掉 snacks 的 LSP 快捷键，使用 LazyVim 默认的
-      -- LazyVim 默认快捷键：
-      -- gd - 跳转到定义（使用 vim.lsp.buf.definition）
-      -- gD - 跳转到声明（使用 vim.lsp.buf.declaration）
-      -- gr - 查找引用（使用 vim.lsp.buf.references）
-      -- gI - 跳转到实现（使用 vim.lsp.buf.implementation）
-      -- <leader>ss - LSP 符号（使用 trouble.nvim）
-      -- { "gd", function() require("snacks").picker.lsp_definitions() end, desc = "[Snacks] 跳转到定义" },
-      -- { "gD", function() require("snacks").picker.lsp_declarations() end, desc = "[Snacks] 跳转到声明" },
-      -- { "gr", function() require("snacks").picker.lsp_references() end, desc = "[Snacks] LSP References" },
-      -- { "gI", function() require("snacks").picker.lsp_implementations() end, desc = "[Snacks] 跳转到实现" },
-      -- { "<leader>ss", function() require("snacks").picker.lsp_symbols() end, desc = "[Snacks] LSP Symbols" },
+      -- 启用 Snacks 的 LSP 功能，提供更好的用户体验
+      { "gd", function() require("snacks").picker.lsp_definitions() end, desc = "[Snacks] 跳转到定义" },
+      { "gD", function() require("snacks").picker.lsp_declarations() end, desc = "[Snacks] 跳转到声明" },
+      { "gr", function() require("snacks").picker.lsp_references() end, desc = "[Snacks] 查看引用" },
+      { "gI", function() require("snacks").picker.lsp_implementations() end, desc = "[Snacks] 跳转到实现" },
+      { "gy", function() require("snacks").picker.lsp_type_definitions() end, desc = "[Snacks] 跳转到类型定义" },
+      { "<leader>ss", function() require("snacks").picker.lsp_symbols() end, desc = "[Snacks] LSP 符号" },
     },
 
     init = function()
